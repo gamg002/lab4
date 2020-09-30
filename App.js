@@ -1,21 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ImageBackground, StyleSheet } from 'react-native';
+import Forecast from './Forecast';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default function Weather(props) {
+    const [forecastInfo, setForecastInfo] = useState({
+        main: '-',
+        description: '-',
+        temp: 0
+    })
+    return (
+        <View>
+            <ImageBackground source={require('./bg.jpg')} style={styles.backdrop}>
+                <Text>Zip Code</Text>
+                <Text>{props.zipCode}</Text>
+                <Forecast {...forecastInfo} />
+            </ImageBackground>
+        </View>
+    );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backdrop: {
+        alignItems: 'center',
+        width: '100%',
+        height: '100%'
+    },
 });
